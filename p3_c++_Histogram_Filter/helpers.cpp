@@ -98,9 +98,17 @@ vector < vector <float> > blur(vector < vector < float> > grid, float blurring) 
 
 	for (int i = 0;i<window.size();i++){
 		for(int j = 0; j < window[0].size();j++){
-			std::cout << window[i][j] << " ";
+			for(int dx = -1; dx < 2; dx++){
+				for(int dy = -1; dy < 2; dy++){
+					 float mul = window[dx+1][dy+1];
+					 int new_x = (i+dx+height)%height;
+					 int new_y = (j+dy+width)%width;
+					 newGrid[new_x][new_y] += mul * grid[i][j];
+
+				}
+			}
 		}
-		std::cout << std::endl;
+		
 	}
 	
 	// your code here
