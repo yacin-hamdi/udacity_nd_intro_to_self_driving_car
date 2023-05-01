@@ -85,7 +85,23 @@ vector< vector<float> > normalize(vector< vector <float> > grid) {
 */
 vector < vector <float> > blur(vector < vector < float> > grid, float blurring) {
 
-	vector < vector <float> > newGrid;
+	int height = grid.size();
+	int width = grid[0].size();
+	float center_prob = 1.0-blurring;
+	float adjacent_prob = blurring/6.0;
+	float corner_prob = blurring/12.0;
+	vector<vector<float>> window {{corner_prob, adjacent_prob, corner_prob},
+									{adjacent_prob, center_prob, adjacent_prob},
+									{corner_prob, adjacent_prob, corner_prob}};
+
+	vector<vector<float>> newGrid(height, vector<float>(width, 0));
+
+	for (int i = 0;i<window.size();i++){
+		for(int j = 0; j < window[0].size();j++){
+			std::cout << window[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
 	
 	// your code here
 
